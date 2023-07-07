@@ -1,29 +1,30 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
+var items = [];
+
 const app = express();
 
 app.set("view engine", "ejs");
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
+
 app.get("/", function (req, res) {
+  var options = {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  };
   var today = new Date();
-  var currentDay = today.getDay();
-  var Day = "";
-  if (currentDay == 0) {
-    Day = "Sunday";
-  } else if (currentDay == 1) {
-    Day = "Monday";
-  } else if (currentDay == 2) {
-    Day = "Tuesday";
-  } else if (currentDay == 3) {
-    Day = "Wednesday";
-  } else if (currentDay == 4) {
-    Day = "Thursday";
-  } else if (currentDay == 5) {
-    Day = "Friday";
-  } else {
-    var Day = "Saturday";
-  }
-  res.render("list", { kindOfDay: Day });
+  var day = today.toLocaleString("en-US", options);
+  res.render("list", { day: day, items: items });
+});
+
+app.post("/", function (req, res) {
+  var item = req.body.item;
+  items.push(item);
+  res.redirect("/");
 });
 
 app.listen(3000, function () {
