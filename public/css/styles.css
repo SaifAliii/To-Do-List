@@ -2,7 +2,7 @@ html {
   background-color: #e4e9fd;
   background-image: -webkit-linear-gradient(65deg, #a683e3 50%, #e4e9fd);
   min-height: 1000px;
-  font-family: "helvetica neue";
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
 h1 {
@@ -86,7 +86,7 @@ input[type="text"]:focus {
 
 ::placeholder {
   color: grey;
-  opacity: 1;
+  opacity: 0.5;
 }
 
 footer {
